@@ -1,0 +1,24 @@
+version: "3.7"
+
+networks:
+  db-network:
+    driver: bridge
+
+services:
+  db-postgres:
+    image: postgres
+    container_name: db-postgres
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=fin_api
+    volumes:
+      - pgdata:/data/postgres
+    networks:
+      - db-network
+
+volumes:
+  pgdata:
+    driver: local
